@@ -16,10 +16,29 @@ To clone this repository to your local machine, follow the steps bellow:
 
 1. Open the terminal
 2. Navigate to the directory where you want to clone  the repository.
-3. Run the following command:
+3. Execute command to clone the repository
 
 ```bash
 cd C:/users/{your_username}/Documents/
 git clone https://github.com/pauloperris/projeto-inovacao-ifba.git
-cd C:/users/{your_username}/Documents/projeto-inovacao-ifba/
+cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
+```
 
+## How to install dependences
+1. Open the terminal
+2. Navigate to the directory where are to save the repository.
+3. Intro you will to execute  command
+
+```bash
+cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
+pip install -r requirements.txt
+```
+
+## How to fix error with library dlib
+1. Open the terminal
+2. Navigate to the directory where are to clone the repository.
+3. Execute command to install library
+```bash
+cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
+pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
+```
