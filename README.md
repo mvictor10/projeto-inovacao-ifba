@@ -18,7 +18,7 @@ To clone this repository to your local machine, follow the steps bellow:
 2. Navigate to the directory where you want to clone  the repository.
 3. Run the following command:
 
-''' bash
+```bash
 cd C:/users/{your_username}/Documents/
 git clone https://github.com/pauloperris/projeto-inovacao-ifba.git
 cd C:/users/{your_username}/Documents/projeto-inovacao-ifba/
