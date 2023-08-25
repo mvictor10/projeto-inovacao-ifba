@@ -5,7 +5,7 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 users = {
-	"mvictor": "65564747"
+	"admin": "admin"
 }
 
 @app.route('/')

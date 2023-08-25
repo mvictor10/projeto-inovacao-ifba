@@ -7,8 +7,7 @@ app = Flask(__name__)
 auth = HTTPBasicAuth()
 
 users = {
-    "mvictor": "samael65564747*",
-    "amanda":"rodadesamsara*"
+    "mvictor": "admin",
 }
 
 
