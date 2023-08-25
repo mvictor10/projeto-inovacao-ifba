@@ -10,12 +10,13 @@ Components:
 6. Prof. Paulo
 7. Sheory
 
-## You will must to install library
-# flask
-# flask_httpauth
-# face_recognition
-# numpy
-# opencv-python
+## project clone
+### git clone git@github.com:pauloperris/projeto-inovacao-ifba.git
+
+## Enter into the project directory that you cloned.
+### cd projeto-inovacao-ifba
+
+### pip install -r requirements.txt
 
 ## Attention, This project is using version python3.8 
 
