@@ -10,19 +10,16 @@ Components:
 6. Prof. Paulo
 7. Sheory
 
-## project clone
-### git clone git@github.com:pauloperris/projeto-inovacao-ifba.git
+## How to clone This Repository
 
-## Enter into the project directory that you cloned.
-### cd projeto-inovacao-ifba
+To clone this repository to your local machine, follow the steps bellow:
 
-### pip install -r requirements.txt
+1. Open the terminal
+2. Navigate to the directory where you want to clone  the repository.
+3. Run the following command:
 
-## Attention, This project is using version python3.8 
+''' bash
+cd C:/users/{your_username}/Documents/
+git clone https://github.com/pauloperris/projeto-inovacao-ifba.git
+cd C:/users/{your_username}/Documents/projeto-inovacao-ifba/
 
-### How you will fixed error with dlib library python.
-In this example, I'll demostrate like you will working  with this problem and like fix it.
-1. Please, open command terminal, if you been using OS Windows then CMD else  the shell terminal in the linux.
-2. Type in the terminal: 
-### pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
-3. Now all it finalized, run your project.
