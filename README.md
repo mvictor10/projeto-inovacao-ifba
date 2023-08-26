@@ -69,7 +69,7 @@ CREATE TABLE image_table(
 );
 ```
 
-## Please, Look to mysql.py file and writer your credencial to connect database any difficulty.
+Please, Look to mysql.py file and writer your credencial to connect database any difficulty.
 
 Example:
 
