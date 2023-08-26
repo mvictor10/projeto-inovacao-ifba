@@ -42,3 +42,29 @@ pip install -r requirements.txt
 cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
 pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 ```
+
+## How to create database
+
+1. Open the terminal
+2. Execute to command
+3. Type to your password
+
+```bash
+mysql -u {username} -p
+```
+### Now we will execute query to create database
+```sql
+CREATE DATABASE image_db;
+```
+### Now we will execute query to create us the table
+
+```sql
+CREATE TABLE image_table(
+   id_pessoa INT NOT NULL AUTOINCREMENT,
+   nome_pessoa VARCHAR(32) NOT NULL,
+   image_pessoa LONGBLOB,
+   phone_pessoa VARCHAR(15) NOT NULL,
+   email_pessoa VARCHAR(150) NOT NULL,
+   PRIMARY KEY(id_pessoa)
+);
+```
