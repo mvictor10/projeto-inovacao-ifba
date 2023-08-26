@@ -52,7 +52,7 @@ pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 ```bash
 mysql -u {username} -p
 ```
-Now we will execute query to create database
+Now we will execute query to create the database
 ```sql
 CREATE DATABASE image_db;
 ```
@@ -67,4 +67,22 @@ CREATE TABLE image_table(
    email_pessoa VARCHAR(150) NOT NULL,
    PRIMARY KEY(id_pessoa)
 );
+```
+
+## Please, Look to mysql.py file and writer your credencial to connect database any difficulty.
+
+Example:
+
+
+```python
+# library that you will to use
+from dao.mysql import DatabaseConnect
+# instance that you will to create.
+db = DatabaseConnect(
+  "image_db", # Database name
+  "root", # User to database
+  "root", # Password to database
+  "localhost", # host name or IP
+  "3306" # port number, by default mysql to use the port 3306
+)
 ```
