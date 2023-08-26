@@ -4,7 +4,7 @@ import cv2
 face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_frontalface_default.xml')
 
 # Capturar vídeo da webcam usando o backend DirectShow
-cap = cv2.VideoCapture(120, cv2.CAP_DSHOW)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 # Definir a resolução da câmera para 640x480
 cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
