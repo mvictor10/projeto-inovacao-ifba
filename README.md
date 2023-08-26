@@ -52,11 +52,11 @@ pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 ```bash
 mysql -u {username} -p
 ```
-### Now we will execute query to create database
+Now we will execute query to create database
 ```sql
 CREATE DATABASE image_db;
 ```
-### Now we will execute query to create us the table
+Now we will execute query to create us the table
 
 ```sql
 CREATE TABLE image_table(
