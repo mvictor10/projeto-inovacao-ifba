@@ -1,0 +1,24 @@
+# database.py
+# Example to use:
+
+if __name__ == "__main__":
+	db = DatabaseConnection(
+		dname="your_dbname",
+		user="your_user",
+		password="your_password",
+		host="your_host",
+		port="your_port"
+	)
+
+
+	# save a image on table
+
+	db.save_image("Lucifer Morningstar", "/path/to/image.jpg", "(13) 9-99990666", "lucifer@morningstars.com")
+
+	# recover all the registers on table
+
+	records = db.get_all_records()
+	for record in records:
+		print(record)
+
+	db.close_connetion()
