@@ -1,14 +1,14 @@
 import cv2
-from dao.database import DatabaseConnection
+from dao.mysql import DatabaseConnection
 import os
 
 # Crie uma instância da classe DatabaseConnection
 db = DatabaseConnection(
-    dbname="postgres",
-    user="postgres",
+    dbname="image_db",
+    user="mvictor",
     password="65564747",
     host="localhost",
-    port="5433"
+    port="3306"
 )
 
 # Inicialize a câmera (webcam)
@@ -39,22 +39,26 @@ while True:
 
     # Se a tecla "s" for pressionada, salve a imagem no banco de dados
     if key == ord("s"):
-        codigo = int(input("Digite o ID da pessoa: "))
         name = input("Digite o nome da pessoa: ")
         phone = input("Digite o telefone da pessoa: ")
         email = input("Digite o email da pessoa: ")
 
-        # Salve a imagem no banco de dados
-        image_path = "captured_image.jpeg"  # Nome do arquivo de imagem a ser salvo
-        cv2.imwrite(image_path, frame)
-        db.save_image(codigo, name, image_path, phone, email)
-        print("Imagem e informações salvas no banco de dados!")
+        # Defina o nome do arquivo de imagem a ser salvo
+        image_path = "captured_image.jpg"
+        print("Image salva: ", image_path)
 
-        # Exclua a imagem após ser salva
-        os.remove(image_path)
-        print("Imagem excluída da pasta.")
+        # Salve a imagem no arquivo
+        cv2.imwrite(image_path, frame)
+
+        
+        with open(image_path, "rb") as image_file:
+            image_binary = image_file.read()
+
+        db.save_image(name, image_binary, phone, email)
+        print("Imagem e informações salvas no banco de dados!")
+        db.close_connection()
 
 # Libere os recursos
 camera.release()
 cv2.destroyAllWindows()
-db.close_connection()
+

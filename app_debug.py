@@ -2,12 +2,12 @@ import cv2
 import face_recognition
 import threading
 import numpy as np
-import tempfile 
-from dao.database import DatabaseConnection
-import os
+from dao.mysql import DatabaseConnection
+from PIL import Image
+from io import BytesIO
 
 class FaceDetectionRecognition:
-    def __init__(self, image_paths):
+    def __init__(self):
         self.font = cv2.FONT_HERSHEY_SIMPLEX
         self.cadastrado_cor = (0, 255, 0)  # Verde neon para pessoa cadastrada
         self.desconhecido_cor = (0, 0, 255)  # Vermelho para pessoa desconhecida
@@ -21,12 +21,34 @@ class FaceDetectionRecognition:
         self.known_faces = []
         self.known_names = []
 
-        for path in image_paths:
-            image = face_recognition.load_image_file(path)
-            face_encoding = face_recognition.face_encodings(image)[0]
+        # Crie uma instância da classe DatabaseConnection
+        db = DatabaseConnection(
+            dbname="your_database",
+            user="your_user",
+            password="your_password",
+            host="your_host",
+            port="your_port"
+        )
+
+        # Recupere todas as imagens da base de dados
+        image_records = db.get_all_records()
+
+        for record in image_records:
+            _, name, image_binary, _, _ = record
+            
+            # Converta os dados binários em um array de bytes
+            image_bytes = bytearray(image_binary)
+
+            # Converta os bytes em um objeto de imagem Pillow
+            image_pil = Image.open(BytesIO(image_bytes))
+
+            # Converta a imagem Pillow em um array de imagem NumPy
+            image_array = np.array(image_pil)
+
+            face_encoding = face_recognition.face_encodings(image_array)[0]
             self.known_faces.append(face_encoding)
-            name = path.split("/")[-1].split(".")[0]  # Extrair o nome do caminho da imagem
-            self.known_names.append(name)
+            self.known_names.append(name)  # Use o nome do registro
+
 
     def detect_recognize_faces(self):
         while True:
@@ -57,8 +79,6 @@ class FaceDetectionRecognition:
         thread.start()
         thread.join()
 
-if __name__ == "__main__":
-    # image_arrays = ['manoel.jpg', 'a.jpeg', 'b.jpeg', 'c.jpeg', 'd.jpg', 'e.jpg', 'f.jpg', 'g.jpg', 'h.jpg', 'i.jpg']  # Adicione os caminhos das imagens no vetor
-    image_arrays = ['manoel.jpg', 'a.jpeg']
-    face_detection_recognition = FaceDetectionRecognition(image_arrays)
-    face_detection_recognition.start()
+# Crie uma instância da classe FaceDetectionRecognition e inicie a detecção
+face_detection_recognition = FaceDetectionRecognition()
+face_detection_recognition.start()
