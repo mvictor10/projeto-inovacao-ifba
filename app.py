@@ -11,7 +11,7 @@ cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 
 # Definir a taxa de quadros para 30fps
-cap.set(cv2.CAP_PROP_FPS,120)
+cap.set(cv2.CAP_PROP_FPS,30)
 
 # Definir o formato de vídeo para MJPG
 cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
