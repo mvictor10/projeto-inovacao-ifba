@@ -60,7 +60,7 @@ class FaceDetectionRecognition:
 
             for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
                 matches = face_recognition.compare_faces(self.known_faces, face_encoding)
-                name = "Pessoa Desconhecida"
+                name = "Intruso"
                 cor = self.desconhecido_cor
                 if any(matches):
                     name = self.known_names[matches.index(True)]
