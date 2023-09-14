@@ -5,6 +5,7 @@ import numpy as np
 from dao.mysql import DatabaseConnection
 from PIL import Image
 from io import BytesIO
+from utils.myserial import MYSerial
 
 class FaceDetectionRecognition:
     def __init__(self):
@@ -33,11 +34,13 @@ class FaceDetectionRecognition:
         # lista de matriculas daquele aluno
         self.know_matricula = []
 
+        self.my_serial = MYSerial('COM6', 9600)
+
         # Crie uma instância da classe DatabaseConnection
         db = DatabaseConnection(
             dbname="image_db",
-            user="root",
-            password="root",
+            user="ifba",
+            password="ifba6514",
             host="localhost",
             port="3306"
         )
@@ -65,6 +68,7 @@ class FaceDetectionRecognition:
             self.know_matricula.append(matricula) # Usa a matricula do aluno.
 
     def detect_recognize_faces(self):
+        self.my_serial.load()
         while True:
             ret, img = self.cap.read()
             rgb_img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -80,15 +84,16 @@ class FaceDetectionRecognition:
                     name = self.known_names[matches.index(True)]
                     matricula = self.know_matricula[matches.index(True)]
                     cor = self.cadastrado_cor
-
                 # Verification student in the database.
                 if name == "Desconhecido": # student dont found.
                     cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
-                    cv2.putText(img, name, (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
+                    cv2.putText(img, "["+ name + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
+                    self.my_serial.receive(0) # envia dados serial para o arduino
                 else: # There is a student with its similiraty face.
+                    aluno_cadastrado = f"{name}{matricula}"
                     cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
-                    cv2.putText(img, "[Aluno:"+ name + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
-
+                    cv2.putText(img, "[Aluno:"+  aluno_cadastrado + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
+                    self.my_serial.receive(1) # envia dados serial para o arduino
             cv2.imshow('img', img)
 
             if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -100,6 +105,7 @@ class FaceDetectionRecognition:
         thread.start()
         thread.join()
 
-# Crie uma instância da classe FaceDetectionRecognition e inicie a detecção
-face_detection_recognition = FaceDetectionRecognition()
-face_detection_recognition.start()
+if __name__ == "__main__":
+    # Crie uma instância da classe FaceDetectionRecognition e inicie a detecção
+    face_detection_recognition = FaceDetectionRecognition()
+    face_detection_recognition.start()
