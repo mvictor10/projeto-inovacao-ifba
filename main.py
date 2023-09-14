@@ -36,8 +36,8 @@ class FaceDetectionRecognition:
         # Crie uma instância da classe DatabaseConnection
         db = DatabaseConnection(
             dbname="image_db",
-            user="mvictor",
-            password="65564747",
+            user="root",
+            password="root",
             host="localhost",
             port="3306"
         )
