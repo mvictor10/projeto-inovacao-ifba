@@ -42,3 +42,56 @@ pip install -r requirements.txt
 cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
 pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 ```
+
+## How to create database
+
+1. Open the terminal
+2. Execute to command
+3. Type to your password
+
+```bash
+mysql -u {username} -p
+```
+Now we will execute query to create the database
+```sql
+CREATE DATABASE image_db;
+```
+Now we will execute query to create us the table
+
+```sql
+CREATE TABLE IF NOT EXISTS image(
+   id INT NOT NULL AUTO_INCREMENT,
+   imagem_aluno LONGBLOB NOT NULL,
+   id_aluno INT NOT NULL,
+   FOREIGN KEY(id) REFERENCES aluno(id),
+   PRIMARY KEY(id)
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS aluno(
+   id INT NOT NULL,
+   nome VARCHAR(32) NOT NULL,
+   phone VARCHAR(15) NOT NULL,
+   email VARCHAR(150) NOT NULL,
+   PRIMARY KEY(id)
+);
+```
+
+Please, Look to mysql.py file and writer your credencial to connect database any difficulty.
+
+Example:
+
+
+```python
+# library that you will to use
+from dao.mysql import DatabaseConnect
+# instance that you will to create.
+db = DatabaseConnect(
+  "image_db", # Database name
+  "root", # User to database
+  "root", # Password to database
+  "localhost", # host name or IP
+  "3306" # port number, by default mysql to use the port 3306
+)
+```

@@ -6,7 +6,7 @@ import os
 db = DatabaseConnection(
     dbname="image_db",
     user="mvictor",
-    password="65564747",
+    password="admin",
     host="localhost",
     port="3306"
 )
