@@ -37,6 +37,15 @@ class DatabaseConnection:
         except Exception as e:
             print("Error:", e)
 
+    def get_all(self):
+        try:
+            with self.connection.cursor() as cursor:
+                select_query = "SELECT * FROM aluno a JOIN imagem i ON i.id_aluno = a.id"
+                cursor.execute(select_query)
+                records = cursor.fetchall()
+                return records
+        except Exception as e:
+            print("Error:", e)
 
     def get_all_records(self):
         try:

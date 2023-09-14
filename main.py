@@ -8,33 +8,46 @@ from io import BytesIO
 
 class FaceDetectionRecognition:
     def __init__(self):
+        # fonte pra mostra texto
         self.font = cv2.FONT_HERSHEY_SIMPLEX
         self.cadastrado_cor = (0, 255, 0)  # Verde neon para pessoa cadastrada
         self.desconhecido_cor = (0, 0, 255)  # Vermelho para pessoa desconhecida
         self.tamanho = 1
         self.espessura = 2
+        # selecionar webcam
         self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
-        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
-        self.cap.set(cv2.CAP_PROP_FPS, 30)
+        # definir largura da tela
+        self.cap.set(3, 640)
+        # definir altura da tela.
+        self.cap.set(4, 480)
+        # definir número de frames por segudo
+        self.cap.set(cv2.CAP_PROP_FPS, 120)
+        # qual o formato de captura de video
         self.cap.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG'))
+        # lista de rosto conhecidos.
         self.known_faces = []
+        # lista de nomes dos rostos conhecidos.
         self.known_names = []
+        # lista de telefones das pessoas cadastradas.
+        self.know_phones = []
+        # lista de matriculas daquele aluno
+        self.know_matricula = []
 
         # Crie uma instância da classe DatabaseConnection
         db = DatabaseConnection(
-            dbname="your_database",
-            user="your_user",
-            password="your_password",
-            host="your_host",
-            port="your_port"
+            dbname="image_db",
+            user="mvictor",
+            password="65564747",
+            host="localhost",
+            port="3306"
         )
 
         # Recupere todas as imagens da base de dados
-        image_records = db.get_all_records()
+        image_records = db.get_all()
 
         for record in image_records:
-            _, name, image_binary, _, _ = record
+            matricula, name, phone, _, _, image_binary, _ = record
+            #_, name, _, image_binary, _, _ = record
             
             # Converta os dados binários em um array de bytes
             image_bytes = bytearray(image_binary)
@@ -48,7 +61,8 @@ class FaceDetectionRecognition:
             face_encoding = face_recognition.face_encodings(image_array)[0]
             self.known_faces.append(face_encoding)
             self.known_names.append(name)  # Use o nome do registro
-
+            self.know_phones.append(phone) # Use o phone de registro
+            self.know_matricula.append(matricula) # Usa a matricula do aluno.
 
     def detect_recognize_faces(self):
         while True:
@@ -60,14 +74,20 @@ class FaceDetectionRecognition:
 
             for (top, right, bottom, left), face_encoding in zip(face_locations, face_encodings):
                 matches = face_recognition.compare_faces(self.known_faces, face_encoding)
-                name = "Intruso"
+                name = "Desconhecido"
                 cor = self.desconhecido_cor
                 if any(matches):
                     name = self.known_names[matches.index(True)]
+                    matricula = self.know_matricula[matches.index(True)]
                     cor = self.cadastrado_cor
 
-                cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
-                cv2.putText(img, name, (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
+                # Verification student in the database.
+                if name == "Desconhecido": # student dont found.
+                    cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
+                    cv2.putText(img, name, (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
+                else: # There is a student with its similiraty face.
+                    cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
+                    cv2.putText(img, "[Aluno:"+ name + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
 
             cv2.imshow('img', img)
 
@@ -75,6 +95,7 @@ class FaceDetectionRecognition:
                 break
 
     def start(self):
+        # make threas, it will work very great system.
         thread = threading.Thread(target=self.detect_recognize_faces)
         thread.start()
         thread.join()

@@ -14,8 +14,8 @@ codificacao_vitor = face_recognition.face_encodings(imagem_vitor)[0]
 cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 
 # Definir a resolução da câmera para 640x480
-cap.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+cap.set(3, 640)
+cap.set(4, 480)
 
 # Definir a taxa de quadros para 30fps
 cap.set(cv2.CAP_PROP_FPS, 120)
