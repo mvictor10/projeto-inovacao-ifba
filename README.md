@@ -59,13 +59,22 @@ CREATE DATABASE image_db;
 Now we will execute query to create us the table
 
 ```sql
-CREATE TABLE image_table(
-   id_pessoa INT NOT NULL AUTOINCREMENT,
-   nome_pessoa VARCHAR(32) NOT NULL,
-   image_pessoa LONGBLOB,
-   phone_pessoa VARCHAR(15) NOT NULL,
-   email_pessoa VARCHAR(150) NOT NULL,
-   PRIMARY KEY(id_pessoa)
+CREATE TABLE IF NOT EXISTS image(
+   id INT NOT NULL AUTO_INCREMENT,
+   imagem_aluno LONGBLOB NOT NULL,
+   id_aluno INT NOT NULL,
+   FOREIGN KEY(id) REFERENCES aluno(id),
+   PRIMARY KEY(id)
+);
+```
+
+```sql
+CREATE TABLE IF NOT EXISTS aluno(
+   id INT NOT NULL,
+   nome VARCHAR(32) NOT NULL,
+   phone VARCHAR(15) NOT NULL,
+   email VARCHAR(150) NOT NULL,
+   PRIMARY KEY(id)
 );
 ```
 
