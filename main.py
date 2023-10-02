@@ -94,7 +94,6 @@ class FaceDetectionRecognition:
                     aluno_cadastrado = f"{name}"
                     cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
                     cv2.putText(img, "[Aluno:"+  aluno_cadastrado + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
-                    # self.api_SendSMS.sendMessage(cel, msg_txt)
                     self.my_serial.receive(1) # envia dados serial para o arduino
             cv2.imshow('img', img)
 
