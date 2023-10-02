@@ -34,17 +34,17 @@ if (empty($_SESSION)) {
             <br>
             <div class="form-group"> <!-- Adicione a classe form-group aqui -->
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite o nome">
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
             </div>
 
             <div class="form-group"> <!-- Adicione a classe form-group aqui -->
                 <label for="usuario">Usuário</label>
-                <input type="text" id="usuario" name="usuario" placeholder="Digite o usuário">
+                <input type="text" id="usuario" name="usuario" placeholder="Digite o usuário" required>
             </div>
 
             <div class="form-group"> <!-- Adicione a classe form-group aqui -->
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Digite o E-mail">
+                <input type="email" id="email" name="email" placeholder="Digite o E-mail" required>
             </div>
 
             <div class="form-group"> <!-- Adicione a classe form-group aqui -->

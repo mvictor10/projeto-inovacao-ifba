@@ -29,12 +29,12 @@ if (empty($_SESSION)) {
     </div>
 
     <div class="form-container">
-        <form action="upload.php" method="POST" enctype="multipart/form-data" class="formlogin">
+        <form method="POST" action="upload.php" enctype="multipart/form-data" class="formlogin">
             <h3>Cadastar Imagem</h3>
             <br>
             <label for="email">E-mail do Aluno</label>
             <input type="email" id="email" name="email" placeholder="Digite o E-mail do Aluno" required>
-            <label for="photo">Imagem 1</label>
+            <label for="imagens">Imagems</label>
             <input type="file" id="imagens" name="imagens[]" multiple>
             <br>
             <div class="form-group">

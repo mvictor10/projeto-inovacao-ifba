@@ -35,23 +35,23 @@ if (empty($_SESSION)) {
             <div class="form-group">
                 <label for="codigo">Código</label>
                 <input placeholder="Digite o código" type="number" id="codigo" name="codigo" min="1"
-                    oninput="toUpper(this)" max="99999999999" maxlength="11">
+                    oninput="toUpper(this)" max="99999999999" maxlength="11" required>
             </div>
 
             <div class="form-group">
                 <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" placeholder="Digite o nome">
+                <input type="text" id="nome" name="nome" placeholder="Digite o nome" required>
             </div>
 
             <div class="form-group">
                 <label for="phone">Celular</label>
                 <input type="tel" id="cel" name="cel" maxlength="15" placeholder="(XX) XXXXX-XXXX"
-                    oninput="mascaraTelefone(this);">
+                    oninput="mascaraTelefone(this);" required>
             </div>
 
             <div class="form-group">
                 <label for="email">E-mail</label>
-                <input type="email" id="email" name="email" placeholder="Digite o E-mail">
+                <input type="email" id="email" name="email" placeholder="Digite o E-mail" required>
             </div>
 
             <div class="form-group">
