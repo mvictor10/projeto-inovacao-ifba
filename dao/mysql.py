@@ -23,7 +23,6 @@ class DatabaseConnection:
         except Exception as e:
             print("Error:", e)
             return None
-
     # save image in database
     def save_image(self, nome, image, phone, email):
         try:
