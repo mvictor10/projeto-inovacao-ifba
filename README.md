@@ -52,9 +52,8 @@ pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 
 
 I recommend you to use xampp in this project.
-```text
 [Xampp](https://www.apachefriends.org/download.html)
-```
+
 ```bash
 mysql -u {username} -p
 ```
