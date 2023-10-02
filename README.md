@@ -50,6 +50,10 @@ pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 2. Execute to command
 3. Type to your password
 
+
+obs: I recommend you to use xampp in this project.
+[Xampp](https://www.apachefriends.org/download.html)
+
 ```bash
 mysql -u {username} -p
 ```
