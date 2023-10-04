@@ -37,19 +37,19 @@ pip install -r requirements.txt
 
 # If you are  using python 3.11, please create a virtual environment.
 1. Make a virtual environment yourself.
-```txt
+```bash
 python3 -m venv venv
 ```
 2. Active your virtual environment.
-```txt
+```bash
 source venv/bin/activate
 ```
 3. Try to install dependeces.
-```txt
+```bash
 pip install -r requirements
 ```
 4. Disabling virtual environment
-```txt
+```bash
 deactivate
 ```
 ## How to fix error with library dlib
@@ -60,6 +60,11 @@ deactivate
 cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
 pip install dlib-19.19.0-cp38-cp38-win_amd64.whl
 ```
+A video tutorial on how to solve a problem with dlib.
+[Click Here](https://www.youtube.com/watch?v=d0pMd-MLqtc)
+
+Visual studio for windows is recommended for installation
+[Click Here](https://visualstudio.microsoft.com/pt-br/downloads/)
 
 ## How to create database
 
@@ -71,16 +76,11 @@ I recommend you to use xampp in this project.
 [Xampp](https://www.apachefriends.org/download.html)
 
 ```bash
-mysql -u {username} -p
+mysql -u root -p
 ```
 ```bash
 CREATE USER 'ifba'@'localhost' IDENTIFIED BY 'ifba6514';
-```
-```bash
 GRANT ALL PRIVILEGES ON *.* TO 'ifba'@'localhost' WITH GRANT OPTION;
-```
-
-```bash
 FLUSH PRIVILEGES;
 ```
 
@@ -102,17 +102,6 @@ CREATE TABLE IF NOT EXISTS usuarios_credencial(
 	PRIMARY KEY(id)
 );
 ```
-
-```sql
-CREATE TABLE IF NOT EXISTS image(
-   id INT NOT NULL AUTO_INCREMENT,
-   imagem_aluno LONGBLOB NOT NULL,
-   id_aluno INT NOT NULL,
-   FOREIGN KEY(id) REFERENCES aluno(id),
-   PRIMARY KEY(id)
-);
-```
-
 ```sql
 CREATE TABLE IF NOT EXISTS aluno(
    id INT NOT NULL,
@@ -123,12 +112,21 @@ CREATE TABLE IF NOT EXISTS aluno(
 );
 ```
 ```sql
+CREATE TABLE IF NOT EXISTS image(
+   id INT NOT NULL AUTO_INCREMENT,
+   imagem_aluno LONGBLOB NOT NULL,
+   id_aluno INT NOT NULL,
+   FOREIGN KEY(id) REFERENCES aluno(id),
+   PRIMARY KEY(id)
+);
+```
+```sql
 INSERT INTO aluno(id, nome, phone, email)
-VALUES(1, 'Manoel Vitor', '<your_number>', '<your_email>');
+VALUES(1, 'test', '5599999999999', 'test@email.com');
 ```
 ```sql
 INSERT INTO usuarios_credencial(nome, email, usuario, senha, tipo, data)
-VALUES('administrador', '<your_email>', 'admin', MD5('admin'), '1', CURDATE());
+VALUES('administrador', 'administrador@admin.com', 'admin', MD5('admin'), '1', CURDATE());
 ```
 Please, Look to mysql.py file and writer your credencial to connect database any difficulty.
 
