@@ -1,15 +1,13 @@
-# projeto-inovacao-ifba
-## Projeto Inovação 
-## Eyes-V
+# Eyes-V Project - Verena Eyes v1.0.0
 
-Components and yours responsability:
-1. Felipe (Dev)
-2. Igor (Dev)
-3. Italo (Scrum Master)
-4. Manoel Vitor (Dev)
-5. Matheus (Dev)
-6. Prof. Paulo (Cliente)
-7. Sheory (Dev)
+Equip development:
+* [Felipe](https://github.com/Felipegdecastro)
+* [Igor](https://github.com/igorttosta)
+* [Italo](https://github.com/Itaperam)
+* [Manoel Vitor](https://github.com/manoelvitorsilvasantos)
+* [Matheus Lima](https://github.com/limabarreto)
+* [Prof. Paulo Perris](https://github.com/pauloperris)
+* [Sheory Martins](https://github.com/sheory)
 
 ## How to clone This Repository
 
@@ -21,11 +19,11 @@ To clone this repository to your local machine, follow the steps bellow:
 
 ```bash
 cd C:/users/{your_username}/Documents/
-git clone https://github.com/pauloperris/projeto-inovacao-ifba.git
+git clone https://github.com/pauloperris/projeto-inovacao-ifba
 cd C:/users/{your_username}/Documents/projeto-inovacao-ifba
 ```
 
-## How to install dependences
+## How to install dependences (dlib)
 1. Open the terminal
 2. Navigate to the directory where are to save the repository.
 3. Intro you will to execute  command
@@ -66,7 +64,7 @@ A video tutorial on how to solve a problem with dlib.
 Visual studio for windows is recommended for installation
 [Click Here](https://visualstudio.microsoft.com/pt-br/downloads/)
 
-## How to create database
+## How to create database using mysql terminal CMD or Shell
 
 1. Open the terminal
 2. Execute to command
@@ -78,19 +76,21 @@ I recommend you to use xampp in this project.
 ```bash
 mysql -u root -p
 ```
+After execute it.
 ```bash
 CREATE USER 'ifba'@'localhost' IDENTIFIED BY 'ifba6514';
 GRANT ALL PRIVILEGES ON *.* TO 'ifba'@'localhost' WITH GRANT OPTION;
 FLUSH PRIVILEGES;
 ```
-
 Now we will execute query to create the database
 ```sql
+-- drop database exist
+DROP DATABASE image_db;
+-- create database image_db
 CREATE DATABASE image_db;
-```
-Now we will execute query to create us the table
-
-```sql
+-- use database
+USE image_db;
+-- create table usuario_credencial if not exist 
 CREATE TABLE IF NOT EXISTS usuarios_credencial(
 	id INT NOT NULL AUTO_INCREMENT,
 	nome VARCHAR(255) NOT NULL,
@@ -101,8 +101,7 @@ CREATE TABLE IF NOT EXISTS usuarios_credencial(
 	data DATE,
 	PRIMARY KEY(id)
 );
-```
-```sql
+-- create table aluno if not exist
 CREATE TABLE IF NOT EXISTS aluno(
    id INT NOT NULL,
    nome VARCHAR(32) NOT NULL,
@@ -110,28 +109,26 @@ CREATE TABLE IF NOT EXISTS aluno(
    email VARCHAR(150) NOT NULL,
    PRIMARY KEY(id)
 );
-```
-```sql
-CREATE TABLE IF NOT EXISTS image(
-   id INT NOT NULL AUTO_INCREMENT,
-   imagem_aluno LONGBLOB NOT NULL,
-   id_aluno INT NOT NULL,
-   FOREIGN KEY(id) REFERENCES aluno(id),
-   PRIMARY KEY(id)
+-- create table imagem if not exist
+CREATE TABLE IF NOT EXISTS imagem(
+	id INT NOT NULL AUTO_INCREMENT,
+	imagem_aluno LONGBLOB NOT NULL,
+	id_aluno INT NOT NULL,
+	FOREIGN KEY(id_aluno) REFERENCES aluno(id),
+	PRIMARY KEY(id)
 );
-```
-```sql
+-- insert intro table aluno register begin
 INSERT INTO aluno(id, nome, phone, email)
 VALUES(1, 'test', '5599999999999', 'test@email.com');
-```
-```sql
+-- insert intro table usuario_credencial register begin
 INSERT INTO usuarios_credencial(nome, email, usuario, senha, tipo, data)
 VALUES('administrador', 'administrador@admin.com', 'admin', MD5('admin'), '1', CURDATE());
+
 ```
+## How you'll to use class DatabaseConnect.py from connect database mysql.
 Please, Look to mysql.py file and writer your credencial to connect database any difficulty.
 
 Example:
-
 
 ```python
 # library that you will to use
