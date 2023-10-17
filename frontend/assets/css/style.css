@@ -1,0 +1,154 @@
+*{
+	margin:0;
+	padding:0;	
+}
+
+body{
+	background: linear-gradient();
+	color:#000000;
+	font-weight:bold;
+}
+
+.form{
+	display:flex;
+	flex-direction:column;
+	align-content:center;
+	align-items:center;
+	justify-content:center;
+	width:100%;
+	height:100vh;
+}
+
+.formlogin{
+	border:1px solid transparent;
+	background:#BE3455;
+	color:#fff;
+	border-radius:4px;
+	display:flex;
+	flex-direction:column;
+	padding:40px;
+	box-shadow:10px 10px 40px black;
+}
+
+
+.formlogin 
+label{
+	font-size:24px;
+}
+
+
+.formlogin 
+input[type=number],
+input[type=text],
+input[type=email],
+input[type=tel],
+input[type=password]{
+	font-size:16px;
+	border-radius:5px;
+	border:2px solid #000000;
+	padding:16px;
+}
+
+.formlogin
+input[type=file]
+{
+	border:2px solid #000000;
+	background-color:#000000;
+	color:#ffff;
+	padding:10px 20px;
+	border-radius:5px;
+	cursor:pointer;
+}
+
+.formlogin input[type=file]{
+	border:1px solid transparent;
+}
+
+
+.link a{
+	padding:10px;
+	color:black;
+	text-decoration:none;
+}
+
+#login{
+	border-radius:5px;
+	border:1px solid transparent;
+	padding:6px 0px;
+	font-weight:bolder;
+}
+
+.formlogin a{
+	color:#000;
+	padding-top:4px;
+	text-decoration:none;
+	font-weight:bolder;
+}
+
+.formlogin h3{
+	text-align:center;
+	color:#fff;
+}
+
+.formlogin p{
+	text-align:center;
+	padding:12px;
+	color:#fff;
+}
+
+
+.formlogin a:hover{
+	color:slateblue;
+}
+
+
+.formlogin select option{
+	padding:25px;
+	font-weight:bolder;
+	line-height:2;
+}
+
+.btn{
+	display:flex;
+	flex-direction:row;
+	align-items:center;
+	align-content: center;
+	justify-content:center;
+	color:#000;
+}
+
+
+.btn button{
+	font-size:18px;
+	background:#000000;
+	color:#fff;
+}
+
+.btn button:hover, 
+button:link{
+	background:silver;
+	color:#000;
+}
+
+.btn button{
+	float:left;
+	width:150px;
+}
+
+@media (max-width:720px){
+
+	.form{
+		display:inline-block;
+		margin:5px;
+		margin-top:100px;
+	}
+
+	.formlogin input{
+		padding:15px;
+	}
+
+	#login{
+		padding:12px;
+	}
+}
+

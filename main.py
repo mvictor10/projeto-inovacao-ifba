@@ -16,7 +16,8 @@ class FaceDetectionRecognition:
         self.tamanho = 1
         self.espessura = 2
         # selecionar webcam
-        self.cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
+        #self.cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)
+        self.cap = cv2.VideoCapture(0)
         # definir largura da tela
         self.cap.set(3, 640)
         # definir altura da tela.
@@ -49,9 +50,9 @@ class FaceDetectionRecognition:
         image_records = db.get_all()
 
         for record in image_records:
-            matricula, name, phone, _, _, image_binary, _ = record
-            #_, name, _, image_binary, _, _ = record
-            
+            # pega o retorno do query.
+            # matricula, name, phone, _, _, image_binary, _= record
+            matricula, name, phone, _, image_binary = record
             # Converta os dados binários em um array de bytes
             image_bytes = bytearray(image_binary)
 
@@ -60,6 +61,9 @@ class FaceDetectionRecognition:
 
             # Converta a imagem Pillow em um array de imagem NumPy
             image_array = np.array(image_pil)
+
+            if len(image_array.shape) == 2:
+                image_array = cv2.cvtColor(image_array, cv2.COLOR_BGR2GRAY)
 
             face_encoding = face_recognition.face_encodings(image_array)[0]
             self.known_faces.append(face_encoding)
@@ -91,9 +95,10 @@ class FaceDetectionRecognition:
                     cv2.putText(img, "["+ name + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
                     self.my_serial.receive(0) # envia dados serial para o arduino
                 else: # There is a student with its similiraty face.
-                    aluno_cadastrado = f"{name}"
+                    aluno_cadastrado = f"{name}{matricula}"
                     cv2.rectangle(img, (left, top), (right, bottom), cor, self.espessura)
                     cv2.putText(img, "[Aluno:"+  aluno_cadastrado + "]", (left, top - 10), self.font, self.tamanho, cor, self.espessura, cv2.LINE_AA)
+                    # self.api_SendSMS.sendMessage(cel, msg_txt)
                     self.my_serial.receive(1) # envia dados serial para o arduino
             cv2.imshow('img', img)
 
